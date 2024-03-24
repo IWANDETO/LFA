@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
 from .forms import LoginForm
@@ -25,9 +25,4 @@ def user_login(request):
     return render(request, 'account/login.html', {'form': form})
         
 
-            
 
-
-
-
-# Create your views here.
