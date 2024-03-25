@@ -12,7 +12,7 @@ def user_login(request):
         form = LoginForm(request.POST) # Instantiate form
         if form.is_valid(): # Check if form is valid
             cd = form.cleaned_data
-            user = authenticate(request, username=cd['username'], password=cd['password'] ) #Authenticate User if form is valid
+            user = authenticate(request, email=cd['email'], password=cd['password'] ) #Authenticate User if form is valid
             if user is not None:
                 if user.is_active:
                     login(request, user) # Login user if active
