@@ -31,13 +31,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'account.apps.RegistrationConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'registration.apps.RegistrationConfig'
+    'django.contrib.staticfiles'    
 ]
 
 MIDDLEWARE = [
@@ -122,3 +122,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = 'dashboard' # URL to redirect the user to after a successful login if no next parameter is specified.
+LOGIN_URL = 'login' # The URL to redirect the user to log in 
+LOGOUT_URL = 'logout' # The URL to redirect the user to log out
