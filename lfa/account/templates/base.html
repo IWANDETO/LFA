@@ -9,20 +9,20 @@
         <div id="header">
             <span class="logo">User Management System</span>
             {% if request.user.is_authenticated %}
-            <ul class="menu">
-            <li {% if section == "dashboard" %}class="selected"{% endif %}>
-            <a href="{% url "dashboard" %}">Dashboard</a>
-            </li>
-            </ul>
+                <ul class="menu">
+                    <li {% if section == "dashboard" %}class="selected"{% endif %}>
+                        <a href="{% url "dashboard" %}">My Dashboard</a>
+                    </li>
+                </ul>
             {% endif %}
             <span class="user">
             {% if request.user.is_authenticated %}
-            Hello {{ request.user.first_name }},
-            <a href="{% url "logout" %}">Logout</a>
+                Hello {{ request.user.first_name }},
+                <a href="{% url "logout" %}">Logout</a>
             {% else %}
-            <a href="{% url "login" %}">Log-in</a>
+                <a href="{% url "login" %}">Log-in</a>
             {% endif %}
             </span>
-            </div>
+        </div>
     </body>
 </html>
