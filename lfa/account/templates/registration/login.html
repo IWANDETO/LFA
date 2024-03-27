@@ -12,12 +12,41 @@
     {% else %}
         <p>Please, use the following form to log-in:</p>
     {% endif %}
-    <div class="login-form">
-        <form action="{% url 'login' %}" method="post">
-            {{ form.as_p }}
-            {% csrf_token %}
-            <input type="hidden" name="next" value="{{ next }}" />
-            <p><input type="submit" value="Log-in"></p>
-        </form>
-    </div>
+    <div class="v-center-wrap">
+        <div class="v-center-stuff">
+          
+          <div class="sign-in v-center-wrap" data-finger="false">
+            <div class="v-center-stuff half">
+              <div class="caption">
+                <h1 class="fade">Don't Have a Fingerprint Enabled Device?</h1>
+                <span class="fade">
+                  <button class="btn btn--green_reverse toggle-finger">Standard sign in</button>
+                </span>
+              </div>
+              <div class="login-form">
+                <form action="{% url 'login' %}" method="post">
+                    {{ form.as_p }}
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ next }}" />
+                    <p><input type="submit" value="Log-in"></p>
+                </form>
+            </div>             
+       
+            </div>
+            <div class="v-center-stuff half">
+              <h1 class="fade msg">Place your Finger on the Device Now.</h1>
+              <div class="caption-finger">
+                 <h1 class="fade">Start Using Your Fingerprint</h1>
+                 <span class="fingerprint"></span>
+                 <span class="fade">
+                   <button class="btn btn--white toggle-finger">Use fingerprint</button>
+                 </span>
+              </div>
+            </div>  
+            
+          </div>
+          
+        </div>
+      </div>
 {% endblock %}
+
