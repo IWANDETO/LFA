@@ -171,3 +171,311 @@ ul.messages li a.close {
 .login-form {
     float:left;
 }
+
+
+/* ##
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
+$green: #00c7cd; 
+$grey: #ccc;
+$black: rgb(36,37,42);
+$ease_expo: cubic-bezier(1, 0, 0, 1);
+$ease_out: cubic-bezier(0.23, 1, 0.32, 1);  
+@mixin placeholder {
+  &.placeholder { @content; }
+  &:-moz-placeholder { @content; }
+  &::-moz-placeholder { @content; }
+  &::-webkit-input-placeholder { @content; }
+}
+* {
+  box-sizing:border-box;
+  outline:none;
+}
+html, body {
+  height:100%;
+}
+body {
+  background:  url(http://dev.devolk.pl/demo/fingerprint_sign_in/blur_bgr.jpg) no-repeat center ;
+  background-size:cover;
+  padding:0 1em;
+  font-family: 'Roboto', sans-serif;
+  font-weight:300;
+  font-size:14px;
+}
+h1 {
+  font-size:1.65em;
+  line-height:1.25em;
+  margin:0 0 1.25em;
+  color:$grey;
+}
+h2 {
+  font-size:1.75em;
+}
+
+.v-center {
+  &-wrap {
+    height:100%;
+    display:table;
+    width:100%;
+  }
+  &-stuff {
+    vertical-align:middle;
+    display:table-cell;
+  }
+}
+.half {
+  @media (min-width:640px){
+    width:50%;
+  }
+}
+
+input {
+  width:100%;
+  margin:0 0 2em;
+  padding-top:.75em;
+  border:none;
+  border-bottom:1px solid $black;
+  background:none;
+  font-size:1em;
+  line-height:1.4em;
+  text-align:left;
+  transition:border .15s linear;
+  @include placeholder {
+    color:$black;
+  }
+  &:focus {
+    border-color:$green;
+  }
+}
+label {
+  text-align:left;
+  display:block;
+  text-transform:uppercase;
+  font-size:.8em;
+  font-weight:300;
+  letter-spacing:.6px;
+  color:#ABABAD;
+}
+.btn {
+  text-transform:uppercase;
+  border:2px solid white;
+  border-radius:30px;
+  background:transparent;
+  display:inline-block;
+  font-size:.65em;
+  padding:1.3em 2em 1.4em;
+  letter-spacing:.6px;
+  width:100%;
+  max-width: 150px;
+  transition:.1s linear;
+  &--white {
+    color:$grey;
+    border-color:$grey;
+    &:hover { 
+      border-color:$green;
+      color:$green;
+    }
+  }
+  &--green {
+    color:$green;
+    border-color:$green;
+    &:hover { 
+      border-color:$black;
+      color:$black;
+    }
+  }
+  &--green_reverse {
+    color:$green;
+    border-color:$green;
+    &:hover { 
+      border-color:$grey;
+      color:$grey;
+    }
+  }
+}
+
+
+.sign-in {
+  max-width:700px;
+  max-height:440px;
+  margin:4em auto;
+  position:relative;
+  z-index:1;
+  border-radius:10px;
+  text-align:center;
+  background:rgba(36,37,42,.8);
+  color:white;
+  box-shadow:0 0 40px rgba(36,37,42,.5);
+  padding:0 10px;
+  .half {
+    padding:2em 3.5em;
+    position:relative;
+    z-index:1;
+  }
+  &:after {
+    position:absolute;
+    content:'';
+    background:#F9F9F9;
+    top:-20px;
+    width:calc(50% - 10px);
+    height:calc(100% + 40px);
+    z-index:0;
+    transition:left .3s $ease_expo;
+    border-radius:10px;
+  }
+  form {
+    visibility:hidden;
+    h1 {
+      color:$green;
+      text-transform:uppercase;
+      margin-bottom:2em;
+      font-weight:400;
+      letter-spacing:.4px;
+    }
+    button {
+      margin-top:2.6em;
+    }
+  }
+  .caption {
+    position:absolute;
+    left:-10px;
+    top:50%;
+    padding:0 5em;
+    transform:translate(0,-50%);
+  }
+  .msg {
+    position:absolute;
+    left:0;
+    top:2em;
+    padding:0 3em;
+    color:$black;
+  }
+}
+.fade {
+  transition:opacity .1s linear, transform .4s $ease_out;
+  opacity:0;
+  transform:translate(0,20px);
+}
+.sign-in[data-finger='false']{
+  &:after { left:10px }
+  .caption {
+    visibility:hidden;
+  }
+  form {
+    visibility:visible;
+    .fade { 
+      opacity:1;
+      transform:translate(0,0);
+    }
+    @for $i from 1 to 10 {
+      .fade:nth-child(#{$i}) { transition-delay: (0.05s * $i) }
+    }
+  }
+  .caption-finger {
+    .fade { 
+      opacity:1;
+      transform:translate(0,0);
+    }
+    @for $i from 1 to 10 {
+      .fade:nth-child(#{$i}) { transition-delay: (0.05s * $i) }
+    }
+  }
+  .msg {
+    opacity:0;
+    transform:translate(0,10px);
+    transition:none;
+  }
+}
+.sign-in[data-finger='true']{
+  &:after { left:50% }
+  .caption {
+    visibility:visible;
+    .fade { 
+      opacity:1;
+      transform:translate(0,0);
+    }
+    @for $i from 1 to 10 {
+      .fade:nth-child(#{$i}) { transition-delay: (.2s+0.05s * $i) }
+    }
+  }
+  .caption-finger {
+    .fade { 
+      opacity:0;
+      transform:translate(0,-10px);
+    }
+    h1 {
+      transform:translate(0,10px);
+    }
+    @for $i from 1 to 10 {
+      .fade:nth-child(#{$i}) { transition-delay: (0.05s * $i) }
+    }
+  }
+  .msg {
+    opacity:1;
+    transform:translate(0,0);
+    transition-delay:.2s;
+  }
+  .fingerprint {
+    &:before {
+      opacity:1;
+      transition:opacity .4s .3s linear;
+      animation: spin 2s infinite linear;
+    }
+    &::after {
+      transform:scale(.8) translateZ(0);
+    }
+  }
+}
+.fingerprint {
+  display:inline-block;
+  width:120px;
+  height:120px;
+  margin-bottom:2em;
+  position:relative;
+  z-index:3;
+  &:before {
+    position:absolute;
+    width:112px;
+    height:112px;
+    transform:translateZ(0);
+    border:4px solid $green;
+    border-top-color:transparent;
+    border-bottom-color:transparent;
+    border-radius:50%;
+    content:'';
+    left:0;
+    top:0;
+    opacity:0;
+  }
+  &:after {
+    position:absolute;
+    content:'';
+    top:50%;
+    left:50%;
+    margin:-50px 0 0 -50px;
+    width:100px;
+    height:100px;
+    background-image:url(http://dev.devolk.pl/demo/fingerprint_sign_in/fingerprint.svg);
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:100px;
+  transition:transform .55s .25s $ease_out;
+    transform:translateZ(0);
+  }
+}
+@keyframes spin {
+  0% { transform: rotate(0deg);  }
+  100% { transform: rotate(360deg); }
+  }
+
+.copy {
+  position:absolute;
+  z-index:0;
+  bottom:12px;
+  left:12px;
+  color:$grey;
+  opacity:.3;
+  a{
+    color:inherit;
+  }
+} */
